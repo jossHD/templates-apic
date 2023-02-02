@@ -1,0 +1,6 @@
+variables:
+- group: cred-apic
+- group: dev-apic
+
+- name: runNumber
+  value: '1.0.0-$(Build.BuildNumber)'
