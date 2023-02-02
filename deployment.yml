@@ -9,6 +9,9 @@ trigger:
 pool:
   name: Poc IBK
 
+variables:
+- template: variables.yml
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -16,6 +19,6 @@ steps:
 - task: CmdLine@2
   displayName: 'Login APIC'
   inputs:
-    script: 'apic login -s $(server-apic) -r $(regin-apic)  -u $(user-apic) -p $(pass-apic)'
+    script: 'apic login -s $(server-apic) -r $(region-apic)  -u $(user-apic) -p $(pass-apic)'
   
 
