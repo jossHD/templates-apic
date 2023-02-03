@@ -20,5 +20,8 @@ steps:
   displayName: 'Login APIC'
   inputs:
     script: 'apic login -s $(server-apic) -r $(region-apic)  -u $(user-apic) -p $(pass-apic)'
-  
 
+- task: CmdLine@2
+  displayName: 'Creating new product'
+  inputs:
+    script: 'apic create:product --title $(product-name) --version 1.0.0 --apis {{ templates.api-lab-toolkit.yaml }} --filename {{ templates.producto-lab-toolkit2.yaml }} --gateway-type $(gw-type)'
