@@ -25,3 +25,7 @@ steps:
   displayName: 'Creating new product'
   inputs:
     script: 'apic create:product --title $(product-name) --version 1.0.0 --apis {{ templates.api-lab-toolkit.yaml }} --filename {{ templates.producto-lab-toolkit2.yaml }} --gateway-type $(gw-type)'
+- task: CmdLine@2
+  displayName: 'Pubishing product'
+  inputs:
+    script: 'apic products:publish {{ templates.producto-lab-toolkit2.yaml }} -s $(server-apic) -c $(catalog) -o $(org-prov) --format json'
