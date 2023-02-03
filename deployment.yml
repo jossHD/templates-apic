@@ -13,9 +13,11 @@ variables:
 - template: variables.yml
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
+- task: CmdLine@2
+  displayName: 'Clone file'
+  inputs:
+    script: 'git clone https://github.com/jossHD/templates-apic.git'
 - task: CmdLine@2
   displayName: 'Login APIC'
   inputs:
@@ -24,8 +26,14 @@ steps:
 - task: CmdLine@2
   displayName: 'Creating new product'
   inputs:
-    script: 'apic create:product --title $(product-name) --version 1.0.0 --apis {{ templates.api-lab-toolkit.yaml }} --filename {{ templates.producto-lab-toolkit2.yaml }} --gateway-type $(gw-type)'
+    script: 'apic create:product --title $(product-name) --version 1.0.0 --apis templates.api-lab-toolkit.yaml --filename templates.producto-lab-toolkit2.yaml --gateway-type $(gw-type)'
+
 - task: CmdLine@2
   displayName: 'Pubishing product'
   inputs:
-    script: 'apic products:publish {{ templates.producto-lab-toolkit2.yaml }} -s $(server-apic) -c $(catalog) -o $(org-prov) --format json'
+    script: 'apic products:publish templates.producto-lab-toolkit2.yaml -s $(server-apic) -c $(catalog) -o $(org-prov) --format json'
+
+- task: CmdLine@2
+  displayName: 'Delete file'
+  inputs:
+    script: 'mrdir /s templates-apic'
