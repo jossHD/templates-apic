@@ -21,7 +21,7 @@ steps:
 - task: CmdLine@2
   displayName: 'Creating new product'
   inputs:
-    script: 'apic create:product --title "$(product-name)" --version 1.0.0 --apis templates/api-lab-toolkit.yaml --filename templates/product-lab-toolkit2.yaml --gateway-type $(gw-type)'
+    script: 'apic create:product --title "$(product-name)" --version 1.0.0 --apis templates/api-lab-toolkit.yaml --filename templates/product-lab-toolkit2.yaml --gateway-type $(gw-type) --output Y'
 
 - task: CmdLine@2
   displayName: 'Pubishing product'
