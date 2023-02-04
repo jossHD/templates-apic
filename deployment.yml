@@ -26,6 +26,6 @@ steps:
 - task: CmdLine@2
   displayName: 'Pubishing product'
   inputs:
-    script: 'apic products:publish templates/product-lab-toolkit2.yaml -s $(server-apic) -c $(catalog) -o $(org-prov) --format json'
+    script: 'apic products:publish templates/product-lab-toolkit2.yaml -c $(catalog) -s $(server-apic) -o $(org-prov) --format json'
 
 
