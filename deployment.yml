@@ -23,6 +23,7 @@ steps:
   inputs:
     script: 'apic products:list-all -s $(server-apic) -o $(org-prov) --scope catalog --catalog  qa'
 
+
 - task: CmdLine@2
   displayName: 'Creating new product'
   inputs:
@@ -33,4 +34,8 @@ steps:
   inputs:
     script: 'apic products:publish templates/product-lab-toolkit2.yaml  --catalog  qa -s $(server-apic) -o $(org-prov) --format json'
 
+- task: CmdLine@2
+  displayName: 'Creating new app'
+  inputs:
+    script: 'apic apps:create -s $(server-apic) --catalog qa --consumer-org $(org-cons) -o $(org-prov) templates/app-lab-toolkit.yaml --format json'
 
