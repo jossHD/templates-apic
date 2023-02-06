@@ -18,25 +18,19 @@ steps:
   inputs:
     script: 'apic login -s $(server-apic) -r $(region-apic)  -u $(user-apic) -p $(pass-apic)'
 
-
-- task: CmdLine@2
-  displayName: 'List all catalogs'
-  inputs:
-    script: 'apic catalogs:list -o $(org-prov) -s $(server-apic)'
-
 - task: CmdLine@2
   displayName: 'List all products'
   inputs:
-    script: 'apic products:list-all -s $(server-apic) -o $(org-prov) --scope catalog --catalog  qa'
+    script: 'apic products:list-all -s $(server-apic) -o $(org-prov) --scope catalog -c $(catalog)'
 
 - task: CmdLine@2
   displayName: 'Creating new product'
   inputs:
-    script: 'apic create:product --title "$(product-name)" --version 1.0.0 --apis api-lab-toolkit.yaml --filename templates/product-lab-toolkit2.yaml --gateway-type $(gw-type)'
+    script: 'apic create:product --title "$(product-name)" --version 1.0.0 --apis templates/api-lab-toolkit.yaml --filename product-lab-toolkit2.yaml --gateway-type $(gw-type)'
 
 - task: CmdLine@2
   displayName: 'Pubishing product'
   inputs:
-    script: 'apic products:publish templates/product-lab-toolkit2.yaml -c $(catalog) -s $(server-apic) -o $(org-prov) --format json'
+    script: 'apic products:publish product-lab-toolkit2.yaml -c $(catalog) -s $(server-apic) -o $(org-prov) --format json'
 
 
